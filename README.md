@@ -27,9 +27,52 @@ To implement HASH ALGORITHM
 
 
 ## Program:
+```PY
 
+#include <stdio.h>
+#include <string.h>
+
+void computeHash(const char *message, unsigned char *hash) {
+    unsigned char temp = 0;
+
+    for (int i = 0; message[i] != '\0'; i++) {
+        temp = temp ^ message[i];   // XOR
+        temp = temp + message[i];   // Addition
+    }
+
+    *hash = temp;
+}
+
+int main() {
+    char message[100];
+    unsigned char hash;
+    char inputHash[5];
+    unsigned int receivedHash;
+
+    printf("Enter the message: ");
+    scanf("%s", message);
+
+    computeHash(message, &hash);
+
+    printf("Computed Hash (in hex): %02x\n", hash);
+
+    printf("Enter the received hash (in hex): ");
+    scanf("%s", inputHash);
+
+    sscanf(inputHash, "%x", &receivedHash);
+
+    if (hash == receivedHash)
+        printf("Hash verification successful. Message is unchanged.\n");
+    else
+        printf("Hash verification failed. Message has been altered.\n");
+
+    return 0;
+}
+```
 
 ## Output:
+<img width="1702" height="871" alt="image" src="https://github.com/user-attachments/assets/78948a77-20eb-4aac-a49e-90aa5f521a3b" />
+
 
 ## Result:
 The program is executed successfully.
